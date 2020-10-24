@@ -25,6 +25,9 @@ group :development, :test do
 
   gem 'decidim-dev',:git => 'https://github.com/decidim/decidim.git', :branch => "develop"
   gem 'dotenv-rails'
+
+  gem 'better_errors'
+  gem 'binding_of_caller'
 end
 
 group :development do
