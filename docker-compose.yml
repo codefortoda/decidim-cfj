@@ -35,9 +35,12 @@ services:
     image: postgres
     volumes:
       - pg-data:/var/lib/postgresql/data
+    ports:
+      - 5433:5432
     environment:
       POSTGRES_USER: *postgres_user
       POSTGRES_PASSWORD: *postgres_password
+    hostname: postgres
 
 volumes:
   node_modules: {}
