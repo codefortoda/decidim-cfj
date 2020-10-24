@@ -7,7 +7,9 @@ x-custom:
 
 services:
   app:
-    image: decidim/decidim:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
     volumes:
       - .:/app
       - bundle:/usr/local/bundle
