@@ -61,4 +61,8 @@ Rails.application.configure do
 
   # No precompilation on demand on first request
   config.assets.check_precompiled_asset = false
+  # enable builderrors for Docker environment
+  if Rails.env.development?
+    BetterErrors::Middleware.allow_ip! "0.0.0.0/0"
+  end
 end
