@@ -1,19 +1,11 @@
-# frozen_string_literal: true
+require 'spec_helper'
+ENV['RAILS_ENV'] ||= 'test'
 
-require "spec_helper"
-ENV["RAILS_ENV"] ||= "test"
-
-require File.expand_path("../config/environment", __dir__)
-# require File.expand_path("../../config/environment", __FILE__)
+require File.expand_path('../config/environment', __dir__)
 
 # Prevent database truncation if the environment is production
 abort("The Rails environment is running in production mode!") if Rails.env.production?
-require "rspec/rails"
-
-require "decidim/dev"
-Decidim::Dev.dummy_app_path = File.expand_path(File.join(__dir__, ".."))
-require "decidim/dev/test/base_spec_helper"
-
+require 'rspec/rails'
 # Add additional requires below this line. Rails is not loaded until this point!
 
 # The following line is provided for convenience purposes. It has the downside
@@ -21,7 +13,7 @@ require "decidim/dev/test/base_spec_helper"
 # directory. Alternatively, in the individual `*_spec.rb` files, manually
 # require only the support files necessary.
 #
-Dir[Rails.root.join("spec", "support", "**", "*.rb")].each { |f| require f }
+Dir[Rails.root.join('spec', 'support', '**', '*.rb')].each { |f| require f }
 
 # Checks for pending migrations and applies them before tests are run.
 # If you are not using ActiveRecord, you can remove these lines.
@@ -33,12 +25,12 @@ rescue ActiveRecord::PendingMigrationError => e
 end
 RSpec.configure do |config|
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
-  # config.fixture_path = "#{::Rails.root}/spec/fixtures"
+  config.fixture_path = "#{::Rails.root}/spec/fixtures"
 
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
   # examples within a transaction, remove the following line or assign false
   # instead of true.
-  # config.use_transactional_fixtures = true
+  config.use_transactional_fixtures = true
 
   # RSpec Rails can automatically mix in different behaviours to your tests
   # based on their file location, for example enabling you to call `get` and
@@ -59,4 +51,16 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
+
+  ## from decidim-dev/lib/decidim/dev/test/spec_helper.rb in decidim
+  require "rspec/cells"
+  require "byebug"
+  require "rectify/rspec"
+  require "wisper/rspec/stub_wisper_publisher"
+  require "db-query-matchers"
+  require "action_view/helpers/sanitize_helper"
+
+  config.include Rectify::RSpec::Helpers
+  config.include ActionView::Helpers::SanitizeHelper
+  config.include ERB::Util
 end

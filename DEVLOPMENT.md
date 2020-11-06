@@ -62,7 +62,7 @@ bin/rails db:create db:migrate
 bin/rails db:seed
 ```
 ### 2.9 サーバー起動
-bin/rails s
+bin/rails s 
 
 ### 2.10 お疲れさまでした
 http://localhost:3000 にアクセス
@@ -82,9 +82,10 @@ cd decidim-cfj
 git checkout -b master origin/master
 ```
 
-### 3.3 docker build
+### 3.3 bundle install
 ```
-docker-compose build
+docker-compose run --rm --entrypoint="gem install bundler" app
+docker-compose run --rm --entrypoint="bundle install" app
 ```
 
 ### 3.4 言語の設定
@@ -99,8 +100,8 @@ config.default_locale = :en
 
 ### 3.5 DB作成からシードまで
 ```
-docker-compose run --rm app ./bin/rails db:create db:migrate
-docker-compose run --rm app ./bin/rails db:seed
+docker-compose run --rm --entrypoint="rails db:create db:migrate" app
+docker-compose run --rm --entrypoint="rails db:seed" app
 ```
 
 ### 3.6 サーバー起動
@@ -112,7 +113,7 @@ http://localhost:3000 にアクセス
 
 ## 4. テスト用アカウント情報
 
-テストデータとして用意されているアカウントです。
+テストデータとして用意されているアカウントです。  
 ※ いずれもパスワードは`decidim123456`です
 
 * 管理画面 (http://localhost:3000/system)

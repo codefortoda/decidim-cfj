@@ -4,7 +4,7 @@ source "https://rubygems.org"
 
 ruby RUBY_VERSION
 
-gem "decidim", git: "https://github.com/decidim/decidim.git", branch: "release/0.23-stable"
+gem 'decidim',:git => 'https://github.com/decidim/decidim.git', :branch => "release/0.23-stable"
 
 # gem "decidim", "0.21"
 # gem "decidim-consultations", "0.23.0.dev"
@@ -19,16 +19,14 @@ gem "faker", "~> 1.9"
 
 gem "wicked_pdf", "~> 1.4"
 
-gem "deface"
-
 group :development, :test do
-  gem "byebug", "~> 11.0", platform: :mri
   gem "figaro"
+  gem "byebug", "~> 11.0", platform: :mri
 
-  gem "decidim-dev", git: "https://github.com/decidim/decidim.git", branch: "release/0.23-stable"
-  gem "dotenv-rails"
-  gem "factory_bot_rails"
-  gem "rspec-rails"
+  gem 'decidim-dev',:git => 'https://github.com/decidim/decidim.git', :branch => "release/0.23-stable"
+  gem 'dotenv-rails'
+  gem 'factory_bot_rails'
+  gem 'rspec-rails'
 end
 
 group :development do
@@ -40,9 +38,9 @@ group :development do
 end
 
 group :production do
-  gem "fog-aws"
   gem "sidekiq", "5.2.7"
+  gem "fog-aws"
 end
 
-gem "rubyzip", ">= 1.0.0"
-gem "zip-zip"
+gem 'rubyzip', '>= 1.0.0'
+gem 'zip-zip'
